@@ -140,6 +140,22 @@ typedef struct io_header {
     } GADGET_HEADER;
 
 /*
+** Array definitions
+*/
+
+typedef struct array_header {
+    
+    int N[4];
+    } ARRAY_HEADER;
+
+typedef struct array_particle {
+    
+    int *ia;
+    float *fa;
+    double *da;
+    } ARRAY_PARTICLE;
+
+/*
 ** Sorting structures needed by read_gadget_binary
 */
 
@@ -220,6 +236,14 @@ void write_tipsy_ascii_dpp(FILE (*), const TIPSY_STRUCTURE_DPP (*));
 
 void read_gadget_binary(FILE (*), TIPSY_STRUCTURE (*), double, double, double, double, double, double, double);
 void write_gadget_binary(FILE (*), const TIPSY_STRUCTURE (*), double, double, double, double, double, double, double);
+
+void allocate_array_particle(const ARRAY_HEADER (*), ARRAY_PARTICLE (*));
+    
+void read_array_header(XDR (*), ARRAY_HEADER (*));
+void read_array_particle(XDR (*), const ARRAY_HEADER (*), ARRAY_PARTICLE (*));
+
+void write_array_header(XDR (*), ARRAY_HEADER (*));
+void write_array_particle(XDR (*), const ARRAY_HEADER (*), ARRAY_PARTICLE (*));
 
 #ifdef __cplusplus
 }
