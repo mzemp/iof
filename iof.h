@@ -140,6 +140,39 @@ typedef struct io_header {
     } GADGET_HEADER;
 
 /*
+** ART header
+*/
+
+typedef struct {
+
+    float aexpn;
+    float aexp0;
+    float amplt;
+    float astep;
+    int   istep;
+    float partw;
+    float tintg;
+    float ekin;
+    float ekin1;
+    float ekin2;
+    float au0;
+    float aeu0;
+    int   Nrow;
+    int   Ngrid;
+    int   Nspecies;
+    int   Nseed;
+    float Om0;
+    float Oml0;
+    float hubble;
+    float Wp5;
+    float Ocurv;
+    float Omb0;
+    float mass[10];
+    int   num[10];
+    float fill[80];
+    } ART_HEADER;
+
+/*
 ** Array definitions
 */
 
@@ -244,6 +277,8 @@ void read_array_particle(XDR (*), const ARRAY_HEADER (*), ARRAY_PARTICLE (*));
 
 void write_array_header(XDR (*), ARRAY_HEADER (*));
 void write_array_particle(XDR (*), const ARRAY_HEADER (*), ARRAY_PARTICLE (*));
+
+void flip_4byte(void (*), size_t, size_t);
 
 #ifdef __cplusplus
 }
