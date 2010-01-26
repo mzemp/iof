@@ -283,7 +283,7 @@ void read_array_particle(XDR (*), const ARRAY_HEADER (*), ARRAY_PARTICLE (*));
 void write_array_header(XDR (*), ARRAY_HEADER (*));
 void write_array_particle(XDR (*), const ARRAY_HEADER (*), ARRAY_PARTICLE (*));
 
-void flip_4byte(void (*), size_t, size_t);
+void reorder(void (*), size_t, size_t);
 
 #ifdef __cplusplus
 }

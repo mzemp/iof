@@ -1948,20 +1948,18 @@ void write_array_particle(XDR *xdrs, const ARRAY_HEADER *ah, ARRAY_PARTICLE *ap)
 ** Function for flipping bytes depending on endianness
 */
 
-void flip_4byte(void *pointer, size_t size, size_t n){
+void reorder(void *pointer, size_t size, size_t n){
     
-    unsigned char *current;
-    int i, nbyte;
+    unsigned char *buffer, tmp;
+    int i, j;
     
-    current = pointer;
-    nbyte = n*size/sizeof(unsigned char);
+    buffer = pointer;
     
-    for(i = 0; i < nbyte; i = i+4){
-	current[i] = current[i]^current[i+3];
-	current[i+3] = current[i]^current[i+3];
-	current[i] = current[i]^current[i+3];
-	current[i+1] = current[i+1]^current[i+2];
-	current[i+2] = current[i+1]^current[i+2];
-	current[i+1] = current[i+1]^current[i+2];
+    for(i = 0; i < n; i++){
+        for (j = 0; j < (size/2); j++) {
+	    tmp = buffer[i*size+j];
+	    buffer[i*size+j] = buffer[(i+1)*size-1-j];
+	    buffer[(i+1)*size-1-j] = tmp;
+	    }
 	}
     }
