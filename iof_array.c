@@ -1,9 +1,9 @@
 /*
 ** array.c
 **
-** Various reading and writing functions for arrays
+** Various handling functions for arrays
 **
-** written by Marcel Zemp
+** Written by Marcel Zemp
 */
 
 #include <stdio.h>
@@ -15,7 +15,7 @@
 #include "iof_array.h"
 
 /*
-** Reading and writing functions
+** Functions
 */
 
 void allocate_array_particle(const ARRAY_HEADER *ah, ARRAY_PARTICLE *ap) {

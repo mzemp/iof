@@ -1,9 +1,9 @@
 /*
 ** array.c
 **
-** Various reading and writing functions for arrays
+** Various handling functions for arrays
 **
-** written by Marcel Zemp
+** Written by Marcel Zemp
 */
 
 #ifndef IOF_ARRAY_H
@@ -29,7 +29,7 @@ typedef struct array_particle {
     } ARRAY_PARTICLE;
 
 /*
-** Reading and writing functions
+** Functions
 */
 
 void allocate_array_particle(const ARRAY_HEADER *, ARRAY_PARTICLE *);

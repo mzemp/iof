@@ -1,7 +1,7 @@
 /*
 ** gadget.h
 **
-** Various reading and writing functions for gadget format
+** Various handling functions for gadget format
 **
 ** Written by Marcel Zemp
 */
@@ -56,7 +56,7 @@ typedef struct qsort_tsp {
     } QSORT_TSP;
 
 /*
-** Reading and writing functions
+** Functions
 */
 
 void read_gadget_nb(FILE *, TIPSY_STRUCTURE *, double, double, double, double, double, double, double);

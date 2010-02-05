@@ -1,7 +1,7 @@
 /*
 ** gadget.c
 **
-** Various reading and writing functions for gadget format
+** Various handling functions for gadget format
 **
 ** Written by Marcel Zemp
 */
@@ -45,7 +45,7 @@ int comp_tsp(const void *a, const void *b) {
     }
 
 /*
-** Reading and writing functions
+** Functions
 */
 
 void read_gadget_nb(FILE *fp, TIPSY_STRUCTURE *ts, double a, double dx, double dy, double dz, double dof, double mmw, double uvf) {

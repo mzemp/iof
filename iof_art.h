@@ -1,9 +1,9 @@
 /*
 ** iof_art.h
 **
-** Various reading and writing functions for art format
+** Various handling functions for art format
 **
-** written by Marcel Zemp
+** Written by Marcel Zemp
 */
 
 #ifndef IOF_ART_H
@@ -130,7 +130,7 @@ typedef struct art_data {
     } ART_DATA;
 
 /*
-** Reading and writing functions
+** Functions
 */
 
 void read_art_nb_general_header(ART_DATA *);

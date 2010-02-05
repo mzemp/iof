@@ -1,9 +1,9 @@
 /*
 ** iof_art.c
 **
-** Various reading and writing functions for art format
+** Various handling functions for art format
 **
-** written by Marcel Zemp
+** Written by Marcel Zemp
 */
 
 #include <stdio.h>
@@ -25,7 +25,7 @@ const double art_cell_delta[8][3] = {
     };
 
 /*
-** Reading and writing functions
+** Functions
 */
 
 void read_art_nb_general_header(ART_DATA *ad) {

@@ -1,7 +1,7 @@
 /*
 ** tipsy.h
 **
-** Various reading and writing functions for tipsy format
+** Various handling functions for tipsy format
 **
 ** Written by Marcel Zemp
 */
@@ -107,7 +107,7 @@ typedef struct tipsy_structure_dpp {
     } TIPSY_STRUCTURE_DPP;
 
 /*
-** Copy functions
+** Functions
 */
 
 void copy_tgp_to_tgpdpp(const TIPSY_GAS_PARTICLE *, TIPSY_GAS_PARTICLE_DPP *);
@@ -116,10 +116,6 @@ void copy_tsp_to_tspdpp(const TIPSY_STAR_PARTICLE *, TIPSY_STAR_PARTICLE_DPP *);
 void copy_tgpdpp_to_tgp(const TIPSY_GAS_PARTICLE_DPP *, TIPSY_GAS_PARTICLE *);
 void copy_tdpdpp_to_tdp(const TIPSY_DARK_PARTICLE_DPP *, TIPSY_DARK_PARTICLE *);
 void copy_tspdpp_to_tsp(const TIPSY_STAR_PARTICLE_DPP *, TIPSY_STAR_PARTICLE *);
-
-/*
-** Reading and writing functions
-*/
 
 void read_tipsy_nb_header(FILE *, TIPSY_HEADER *);
 void read_tipsy_nb_gas(FILE *, TIPSY_GAS_PARTICLE *);
