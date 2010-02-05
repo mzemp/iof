@@ -1,20 +1,23 @@
 # Makefile for IOfunctions
 
-BASE	= iof
-VERSION = 1.0
+NAME	= iof
+SOURCES = iof_auxiliary.c iof_tipsy.c iof_gadget.c iof_art.c iof_array.c	
+VERSION = 1.9
 
 CC	= gcc
-CFLAGS	= -O3 -Wall
-LIBS	=
+CFLAGS	= -O3 -Wall -I$(LOCAL_LIB_PATH)/include
 
 # Rules
 
-all:	$(BASE).h Makefile
-	$(CC) $(CFLAGS) -c -o $(BASE).o $(BASE).c
-	ar rcs lib$(BASE).a $(BASE).o
+iof:	$(SOURCES:.c=.o) $(SOURCES:.c=.h) Makefile
+	ar rcs lib$(NAME).a $(SOURCES:.c=.o) $(LIBS)
 
 clean:
 	-rm -f *~ *.o *.a
 
+install:
+	cd ../include; ln -sf ../iof/iof.h .
+	cd ../lib; ln -sf ../iof/libiof.a .
+
 tar:
-	cd ..; tar cvf - $(BASE)/*.c $(BASE)/*.h $(BASE)/Makefile > $(BASE)-$(VERSION).tar
+	cd ..; tar cvf - $(NAME)/*.c $(NAME)/*.h $(NAME)/Makefile > $(NAME)-$(VERSION).tar
