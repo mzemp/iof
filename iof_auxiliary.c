@@ -33,3 +33,31 @@ void reorder(void *pointer, size_t size, size_t n){
 	    }
 	}
     }
+
+/*
+** Function for correcting positions in periodic boundary conditions cubes
+*/
+
+double correct_position(double c, double r, double l) {
+
+    double d;
+
+    d = r-c;
+    if (d > 0.5*l) return r - l;
+    else if (d < -0.5*l) return r + l;
+    else return r;
+    }
+
+/*
+** Function for putting positions back in box
+*/
+
+double put_in_box(double r, double lmin, double lmax) {
+
+    double l;
+
+    l = lmax - lmin;
+    if (r < lmin) return r + l;
+    else if (r > lmax) return r - l;
+    else return r;
+    }

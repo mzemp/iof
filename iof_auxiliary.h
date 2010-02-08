@@ -22,4 +22,16 @@
 
 void reorder(void *, size_t, size_t);
 
+/*
+** Function for correcting positions in periodic boundary conditions cubes
+*/
+
+double correct_position(double, double, double);
+
+/*
+** Function for putting positions back in box
+*/
+
+double put_in_box(double, double, double);
+
 #endif /* IOF_AUXILIARY_H */

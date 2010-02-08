@@ -61,11 +61,18 @@ typedef struct art_header {
     float fill[75];
     } ART_HEADER;
 
-typedef struct art_coordinates {
+typedef struct art_gas_properties {
 
-    double r[3];
-    double v[3];
-    } ART_COORDINATES;
+    double gasdensity;
+    double gasenergy;
+    double momentum[3];
+    double pressure;
+    double gamma;
+    double internalenergy;
+    double electroninternalenergy;
+    double potential;
+    double potentialhydro;
+    } ART_GAS_PROPERTIES;
 
 typedef struct art_star_properties {
 
@@ -75,6 +82,12 @@ typedef struct art_star_properties {
     double metallicitySNII;
     double metallicitySNIa;
     } ART_STAR_PROPERTIES;
+
+typedef struct art_coordinates {
+
+    double r[3];
+    double v[3];
+    } ART_COORDINATES;
 
 typedef struct art_data {
 
@@ -134,7 +147,17 @@ typedef struct art_data {
 */
 
 void read_art_nb_general_header(ART_DATA *);
-void read_art_nb_star_header(ART_DATA *, int index);
 void read_art_nb_gas_header(ART_DATA *, int index);
+void read_art_nb_gas_header_level(ART_DATA *, int, int **);
+void read_art_nb_star_header(ART_DATA *, int index);
+
+void read_art_nb_coordinates_record(ART_DATA, ART_COORDINATES (*));
+void read_art_nb_gas_properties(ART_DATA, ART_GAS_PROPERTIES *); 
+void read_art_nb_star_properties(ART_DATA, ART_STAR_PROPERTIES *);
+
+void move_art_nb_gas_filepositions_level_begin(ART_DATA, int);
+void move_art_nb_gas_filepositions_level_end(ART_DATA, int);
+void move_art_nb_star_filepositions_begin(ART_DATA);
+void move_art_nb_star_filepositions_end(ART_DATA);
 
 #endif /* IOF_ART_H */
