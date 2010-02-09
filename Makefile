@@ -6,6 +6,7 @@ VERSION = 1.9
 
 CC	= gcc
 CFLAGS	= -O3 -Wall -I$(LOCAL_LIB_PATH)/include
+LIBS	=
 
 # Rules
 
@@ -16,8 +17,8 @@ clean:
 	-rm -f *~ *.o *.a
 
 install:
-	cd ../include; ln -sf ../iof/iof.h .
-	cd ../lib; ln -sf ../iof/libiof.a .
+	cd ../include; ln -sf ../$(NAME)/$(NAME).h .
+	cd ../lib; ln -sf ../$(NAME)/lib$(NAME).a .
 
 tar:
 	cd ..; tar cvf - $(NAME)/*.c $(NAME)/*.h $(NAME)/Makefile > $(NAME)-$(VERSION).tar
