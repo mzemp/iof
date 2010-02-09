@@ -9,7 +9,7 @@
 #ifndef IOF_ART_H
 #define IOF_ART_H
 
-#include <sfc.h>
+#include <art_sfc.h>
 
 /*
 ** Definitions
