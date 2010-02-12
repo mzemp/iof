@@ -5,7 +5,7 @@ SOURCES = iof_auxiliary.c iof_tipsy.c iof_gadget.c iof_art.c iof_array.c
 VERSION = 1.9
 
 CC	= gcc
-CFLAGS	= -O3 -Wall -I$(LOCAL_LIB_PATH)/include
+CFLAGS	= -O3 -Wall
 LIBS	=
 
 # Rules

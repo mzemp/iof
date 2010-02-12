@@ -9,8 +9,6 @@
 #ifndef IOF_ART_H
 #define IOF_ART_H
 
-#include <art_sfc.h>
-
 /*
 ** Definitions
 */
@@ -89,6 +87,16 @@ typedef struct art_coordinates {
     double v[3];
     } ART_COORDINATES;
 
+typedef struct art_sfc_info {
+
+    int nDim;
+    int num_grid;
+    int sfc_order;
+    int nBitsPerDim;
+    int nBits;
+    int max_sfc_index;
+    } ART_SFC_INFO;
+
 typedef struct art_data {
 
     /*
@@ -134,7 +142,7 @@ typedef struct art_data {
     /*
     ** SFC info
     */
-    SFC_INFO sfci;
+    ART_SFC_INFO sfci;
     /*
     ** ART files
     */
