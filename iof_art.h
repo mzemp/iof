@@ -142,7 +142,7 @@ typedef struct art_data {
     /*
     ** SFC info
     */
-    ART_SFC_INFO sfci;
+    ART_SFC_INFO asfci;
     /*
     ** ART files
     */

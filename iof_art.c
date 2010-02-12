@@ -236,7 +236,7 @@ void read_art_nb_gas_header(ART_DATA *ad, int index) {
     if (ad->doswap) reorder(&header,sizeof(int),1);
     assert(fread(&idummy,sizeof(int),1,ad->GasFile[index]) == 1);
     if (ad->doswap) reorder(&idummy,sizeof(int),1);
-    ad->sfci.sfc_order = idummy;
+    ad->asfci.sfc_order = idummy;
     assert(fread(&trailer,sizeof(int),1,ad->GasFile[index]) == 1);
     if (ad->doswap) reorder(&trailer,sizeof(int),1);
     assert(header == trailer);
