@@ -120,8 +120,8 @@ typedef struct art_data {
     int Nstarproperties;
     int Nhydroproperties, Notherproperties;
     int Nrtchemspecies, Nchemspecies, Nrtdiskvars;
-    long Ngas, Ndark, Nstar;
-    long Ncell[ART_MAX_NUMBER_GAS_LEVELS], Ncellrefined[ART_MAX_NUMBER_GAS_LEVELS];
+    long int Ngas, Ndark, Nstar;
+    long int Ncell[ART_MAX_NUMBER_GAS_LEVELS], Ncellrefined[ART_MAX_NUMBER_GAS_LEVELS];
     double shift;
     double rootcelllength;
     double toplevelmassdark, toplevelsoftdark, refinementstepdark;

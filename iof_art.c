@@ -488,7 +488,6 @@ void move_art_nb_gas_filepositions_level_begin(ART_DATA ad, int level) {
 		
     fread(&header,sizeof(int),1,ad.GasFile[0]);
     if (ad.doswap) reorder(&header,sizeof(int),1);
-    assert(ad.Nhydroproperties == header/(sizeof(float)*ad.Ncell[level]));
     
     fread(&header,sizeof(int),1,ad.GasFile[1]);
     if (ad.doswap) reorder(&header,sizeof(int),1);
@@ -496,11 +495,9 @@ void move_art_nb_gas_filepositions_level_begin(ART_DATA ad, int level) {
     fread(&trailer,sizeof(int),1,ad.GasFile[1]);
     if (ad.doswap) reorder(&trailer,sizeof(int),1);
     assert(header == trailer);
-    assert(ad.Nhydroproperties == header/(sizeof(float)*ad.Ncell[level]));
     
     fread(&header,sizeof(int),1,ad.GasFile[1]);
     if (ad.doswap) reorder(&header,sizeof(int),1);
-    assert(ad.Notherproperties == header/(sizeof(float)*ad.Ncell[level]));
     }
 
 void move_art_nb_gas_filepositions_level_end(ART_DATA ad, int level) {
@@ -509,7 +506,6 @@ void move_art_nb_gas_filepositions_level_end(ART_DATA ad, int level) {
     
     assert(fread(&trailer,sizeof(int),1,ad.GasFile[0]) == 1);
     if (ad.doswap) reorder(&trailer,sizeof(int),1);
-    assert(ad.Nhydroproperties == trailer/(sizeof(float)*ad.Ncell[level]));
     
     fread(&header,sizeof(int),1,ad.GasFile[0]);
     if (ad.doswap) reorder(&header,sizeof(int),1);
@@ -517,11 +513,9 @@ void move_art_nb_gas_filepositions_level_end(ART_DATA ad, int level) {
     assert(fread(&trailer,sizeof(int),1,ad.GasFile[0]) == 1);
     if (ad.doswap) reorder(&trailer,sizeof(int),1);
     assert(header == trailer);
-    assert(ad.Notherproperties == header/(sizeof(float)*ad.Ncell[level]));
     
     assert(fread(&trailer,sizeof(int),1,ad.GasFile[1]) == 1);
     if (ad.doswap) reorder(&trailer,sizeof(int),1);
-    assert(ad.Notherproperties == trailer/(sizeof(float)*ad.Ncell[level]));
 
     if (level == ad.Lmaxgas) {
 	fclose(ad.GasFile[0]);
