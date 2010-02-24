@@ -1,5 +1,5 @@
 /*
-** auxiliary.c
+** auxiliary.h
 **
 ** Various auxiliary functions and definitions
 **
@@ -15,6 +15,28 @@
 
 #define k_BOLTZMANN 1.3806503e-23
 #define PROTON_MASS 1.6726216e-27
+
+/*
+** Structures
+*/
+
+typedef struct cosmological_parameters {
+
+    double OmegaM0;
+    double OmegaDM0; 
+    double OmegaB0;
+    double OmegaL0;
+    double OmegaK0;
+    double OmegaR0;
+    } COSMOLOGICAL_PARAMETERS;
+
+typedef struct unit_system {
+
+    double LBox;
+    double GNewton;
+    double Hubble0;
+    double rhocrit0;
+    } UNIT_SYSTEM;
 
 /*
 ** Function for flipping bytes depending on endianness
