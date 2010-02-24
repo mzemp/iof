@@ -279,6 +279,9 @@ void read_gadget_nb(FILE *fp, TIPSY_STRUCTURE *ts, double a, double dx, double d
 	assert(fread(&dummy1,sizeof(int),1,fp) == 1);
 	for(i = 0; i < th->ngas; i++) {
 	    assert(fread(&temp,sizeof(float),1,fp) == 1);
+	    /*
+	    ** Internal energy per unit mass => Temperature
+	    */
 	    tgp[i].temp = temp*(uvf*uvf)*(2*mmw*PROTON_MASS)/(dof*k_BOLTZMANN);
 	    }
 	assert(fread(&dummy2,sizeof(int),1,fp) == 1);
@@ -555,6 +558,9 @@ void write_gadget_nb(FILE *fp, const TIPSY_STRUCTURE *ts, double a, double dx, d
 	dummy = th->ngas*sizeof(float);
 	assert(fwrite(&dummy,sizeof(int),1,fp) == 1);
 	for(i = 0; i < th->ngas; i++) {
+	    /*
+	    ** Temperature => Internal energy per unit mass
+	    */
 	    temp = tgp[i].temp*(dof*k_BOLTZMANN)/(2*mmw*PROTON_MASS)/(uvf*uvf);
 	    assert(fwrite(&temp,sizeof(float),1,fp) == 1);
 	    }
