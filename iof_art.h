@@ -61,24 +61,32 @@ typedef struct art_header {
 
 typedef struct art_gas_properties {
 
-    double gasdensity;
-    double gasenergy;
+    double gas_density;
+    double gas_energy;
     double momentum[3];
     double pressure;
     double gamma;
-    double internalenergy;
-    double electroninternalenergy;
+    double internal_energy;
+    double electron_internal_energy;
     double potential;
-    double potentialhydro;
+    double potential_hydro;
+    double HI_number_density;
+    double HII_number_density;
+    double HeI_number_density;
+    double HeII_number_density;
+    double HeIII_number_density;
+    double H2_number_density;
+    double metal_density_SNII;
+    double metal_density_SNIa;
     } ART_GAS_PROPERTIES;
 
 typedef struct art_star_properties {
 
     double mass;
-    double initialmass;
-    double tform;
-    double metallicitySNII;
-    double metallicitySNIa;
+    double initial_mass;
+    double t_form;
+    double metallicity_SNII;
+    double metallicity_SNIa;
     } ART_STAR_PROPERTIES;
 
 typedef struct art_coordinates {
@@ -116,7 +124,6 @@ typedef struct art_data {
     /*
     ** derived stuff to get data better organised
     */
-    int massfromdata;
     int doswap;
     int gascontained, darkcontained, starcontained;
     int Lmingas, Lmaxgas, Nlevelgas;
@@ -138,7 +145,7 @@ typedef struct art_data {
     /*
     ** ART preprocessor flags
     */
-    int GRAVITY, HYDRO, STARFORM, ADVECT_SPECIES, ENRICH, ENRICH_SNIa, RADIATIVE_TRANSFER, ELECTRON_ION_NONEQUILIBRIUM;
+    int GRAVITY, HYDRO, ADVECT_SPECIES, STARFORM, ENRICH, ENRICH_SNIa, RADIATIVE_TRANSFER, ELECTRON_ION_NONEQUILIBRIUM;
     /*
     ** SFC info
     */
@@ -153,6 +160,9 @@ typedef struct art_data {
 /*
 ** Functions
 */
+
+void set_default_values_art_data(ART_DATA *);
+void prepare_art_data(ART_DATA *);
 
 void read_art_nb_general_header(ART_DATA *);
 void read_art_nb_gas_header(ART_DATA *, int index);

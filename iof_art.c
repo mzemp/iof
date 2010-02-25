@@ -28,9 +28,141 @@ const double art_cell_delta[8][3] = {
 ** Functions
 */
 
+void set_default_values_art_data(ART_DATA *ad) {
+
+    int i;
+
+    ad->doswap = 0;
+    ad->gascontained = 0;
+    ad->darkcontained = 0;
+    ad->starcontained = 0;
+    ad->Nparticleperrecord = 0;
+    ad->Nrecord = 0;
+    ad->Ndim = 3;
+    ad->Ngas = 0;
+    ad->Ndark = 0;
+    ad->Nstar = 0;
+    ad->refinementstepdark = 2;
+    ad->toplevelmassdark = -1;
+    ad->toplevelsoftdark = -1;
+    ad->Lmingas = 0;
+    ad->Lmaxgas = 0;
+    ad->Nlevelgas = 0;
+    ad->Lmindark = 0;
+    ad->Lmaxdark = 0;
+    ad->Nleveldark = 0;
+    ad->shift = 1;
+    ad->rootcelllength = 1;
+    for (i = 0; i < ART_MAX_NUMBER_DARK_LEVELS; i++) {
+	ad->Ndarklevel[i] = 0;
+	ad->massdark[i] = 0;
+	ad->softdark[i] = 0;
+	}
+    for (i = 0; i < ART_MAX_NUMBER_GAS_LEVELS; i++) {
+	ad->Ncell[i] = 0;
+	ad->Ncellrefined[i] = 0;
+	}
+    ad->Nhydroproperties = 0;
+    ad->Notherproperties = 0;
+    ad->Nstarproperties = 0;
+    ad->Nrtchemspecies = 0;
+    ad->Nchemspecies = 0;
+    ad->Nrtdiskvars = 0;
+    ad->GRAVITY = 1;
+    ad->HYDRO = 1;
+    ad->ADVECT_SPECIES = 1;
+    ad->STARFORM = 1;
+    ad->ENRICH = 1;
+    ad->ENRICH_SNIa = 1;
+    ad->RADIATIVE_TRANSFER = 1;
+    ad->ELECTRON_ION_NONEQUILIBRIUM = 0;
+    ad->asfci.nDim = 0;
+    ad->asfci.num_grid = 0;
+    ad->asfci.sfc_order = -1;
+    ad->asfci.nBitsPerDim = 0;
+    ad->asfci.nBits = 0;
+    ad->asfci.max_sfc_index = 0;
+    ad->HeaderFile = NULL;
+    ad->CoordinatesDataFile = NULL;
+    for (i = 0; i < ART_MAX_NUMBER_STAR_PROPERTIES; i++) {
+	ad->StarPropertiesFile[i] = NULL;
+	}
+    for (i = 0; i < ART_MAX_NUMBER_GAS_BLOCKS; i++) {
+	ad->GasFile[i] = NULL;
+	}
+    }
+
+void prepare_art_data(ART_DATA *ad) {
+
+    int i;
+
+    /*
+    ** Derive number of properties from flags
+    */
+    ad->Nhydroproperties = 0;
+    ad->Notherproperties = 0;
+    ad->Nstarproperties = 0;
+    if (ad->gascontained) {
+	if (ad->HYDRO) {
+	    if (ad->ADVECT_SPECIES) {
+		if (ad->RADIATIVE_TRANSFER) ad->Nrtchemspecies = 6;
+		else ad->Nrtchemspecies = 0;
+		if (ad->ENRICH) {
+		    if (ad->ENRICH_SNIa) ad->Nchemspecies = ad->Nrtchemspecies + 2;
+		    else ad->Nchemspecies = ad->Nrtchemspecies + 1;
+		    }
+		else ad->Nchemspecies = ad->Nrtchemspecies;
+		}
+	    else ad->Nchemspecies = 0;
+	    if (ad->ELECTRON_ION_NONEQUILIBRIUM) ad->Nhydroproperties = 6 + ad->Ndim + ad->Nchemspecies;
+	    else ad->Nhydroproperties = 5 + ad->Ndim + ad->Nchemspecies;
+	    }
+	if (ad->RADIATIVE_TRANSFER) ad->Nrtdiskvars = 6;
+	else ad->Nrtdiskvars = 0;
+	if (ad->GRAVITY) ad->Notherproperties++;
+	if (ad->HYDRO) ad->Notherproperties++;
+	if (ad->RADIATIVE_TRANSFER) ad->Notherproperties += ad->Nrtdiskvars;
+	}
+    if (ad->starcontained) {
+	ad->Nstarproperties = 3;
+	if (ad->ENRICH) {
+	    if (ad->ENRICH_SNIa) ad->Nstarproperties = ad->Nstarproperties + 2;
+	    else ad->Nstarproperties++;
+	    }
+	}
+    /*
+    ** Read all headers
+    */
+    ad->HeaderFile = fopen(ad->HeaderFileName,"r");
+    assert(ad->HeaderFile != NULL);
+    read_art_nb_general_header(ad);
+    fclose(ad->HeaderFile);
+    if (ad->gascontained) {
+	ad->GasFile[0] = fopen(ad->GasFileName,"r");
+	assert(ad->GasFile[0] != NULL);
+	read_art_nb_gas_header(ad,0);
+	if (ad->GRAVITY || ad->RADIATIVE_TRANSFER) {
+	    ad->GasFile[1] = fopen(ad->GasFileName,"r");
+	    assert(ad->GasFile[1] != NULL);
+	    read_art_nb_gas_header(ad,1);
+	    }
+	}
+    if (ad->darkcontained || ad->starcontained) {
+	ad->CoordinatesDataFile = fopen(ad->CoordinatesDataFileName,"r");
+	assert(ad->CoordinatesDataFile != NULL);
+	}
+    if (ad->starcontained) {
+	for (i = 0; i < ad->Nstarproperties; i++) {
+	    ad->StarPropertiesFile[i] = fopen(ad->StarPropertiesFileName,"r");
+	    assert(ad->StarPropertiesFile[i] != NULL);
+	    read_art_nb_star_header(ad,i);
+	    }
+	}
+    }
+
 void read_art_nb_general_header(ART_DATA *ad) {
 
-    int i, L;
+    int i, index;
     int header, trailer;
 
     ad->doswap = 0;
@@ -49,6 +181,8 @@ void read_art_nb_general_header(ART_DATA *ad) {
     /*
     ** Set some derived quantities
     */
+    ad->asfci.nDim = ad->Ndim;
+    ad->asfci.num_grid = ad->ah.Ngrid;
     ad->Ngas = 0;
     if (ad->darkcontained) {
 	if (ad->starcontained == 1) {
@@ -65,22 +199,13 @@ void read_art_nb_general_header(ART_DATA *ad) {
 	ad->Nleveldark = ad->Lmaxdark-ad->Lmindark+1;
 	ad->Nparticleperrecord = ad->ah.Nrow*ad->ah.Nrow;
 	ad->Nrecord = (ad->Ndark+ad->Nstar+ad->Nparticleperrecord-1)/ad->Nparticleperrecord;
-	if (ad->toplevelmassdark == -1) {
-	    ad->massfromdata = 1;
-	    ad->toplevelmassdark = ad->ah.mass[ad->Lmaxdark];
-	    }
-	assert(ad->toplevelsoftdark >= 0);
-	assert(ad->toplevelmassdark >= 0);
-	for (i = 0; i <= ad->Lmaxdark; i++) {
-	    L = ad->Lmaxdark-i;
-	    if (i == 0) {
-		ad->Ndarklevel[L] = ad->ah.num[i];
+	for (i = ad->Lmindark; i <= ad->Lmaxdark; i++) {
+	    index = ad->Lmaxdark-i;
+	    if (index == 0) {
+		ad->Ndarklevel[i] = ad->ah.num[index];
 		}
 	    else {
-		ad->Ndarklevel[L] = ad->ah.num[i]-ad->ah.num[i-1];
-		}
-	    if (ad->massfromdata == 1) {
-		ad->massdark[L] = ad->ah.mass[i];
+		ad->Ndarklevel[i] = ad->ah.num[index]-ad->ah.num[index-1];
 		}
 	    }
 	}
@@ -434,6 +559,7 @@ void read_art_nb_coordinates_record(ART_DATA ad, ART_COORDINATES *coordinates) {
 
 void read_art_nb_gas_properties(ART_DATA ad, ART_GAS_PROPERTIES *agp) {
 
+    int index;
     float cellhydroproperties[ad.Nhydroproperties], cellotherproperties[ad.Notherproperties];
 
     assert(fread(&cellhydroproperties,sizeof(float),ad.Nhydroproperties,ad.GasFile[0]) == ad.Nhydroproperties);
@@ -443,21 +569,51 @@ void read_art_nb_gas_properties(ART_DATA ad, ART_GAS_PROPERTIES *agp) {
 	if (ad.doswap) reorder(&cellotherproperties,sizeof(float),ad.Notherproperties);
 	}
 
-    agp->gasdensity = cellhydroproperties[0];
-    agp->gasenergy = cellhydroproperties[1];
+    agp->gas_density = cellhydroproperties[0];
+    agp->gas_energy = cellhydroproperties[1];
     agp->momentum[0] = cellhydroproperties[2];
     agp->momentum[1] = cellhydroproperties[3];
     agp->momentum[2] = cellhydroproperties[4];
     agp->pressure = cellhydroproperties[5];
     agp->gamma = cellhydroproperties[6];
-    agp->internalenergy = cellhydroproperties[7];
-    agp->electroninternalenergy = 0;
+    agp->internal_energy = cellhydroproperties[7];
+    agp->electron_internal_energy = 0;
+    if (ad.ELECTRON_ION_NONEQUILIBRIUM) agp->electron_internal_energy = cellhydroproperties[8];
+    agp->HI_number_density = 0;
+    agp->HII_number_density = 0;
+    agp->HeI_number_density = 0;
+    agp->HeII_number_density = 0;
+    agp->HeIII_number_density = 0;
+    agp->H2_number_density = 0;
+    if (ad.Nrtchemspecies > 0) {
+	assert(ad.Nrtchemspecies == 6);
+	if (ad.ELECTRON_ION_NONEQUILIBRIUM) index = 9;
+	else index = 8;
+	agp->HI_number_density    = cellhydroproperties[index];
+	agp->HII_number_density   = cellhydroproperties[index+1];
+	agp->HeI_number_density   = cellhydroproperties[index+2];
+	agp->HeII_number_density  = cellhydroproperties[index+3];
+	agp->HeIII_number_density = cellhydroproperties[index+4];
+	agp->H2_number_density    = cellhydroproperties[index+5];
+	}
+    agp->metal_density_SNII = 0;
+    agp->metal_density_SNIa = 0;
+    if (ad.ENRICH) {
+	if (ad.ENRICH_SNIa) {
+	    index = ad.Nhydroproperties-2;
+	    agp->metal_density_SNII = cellhydroproperties[index];
+	    agp->metal_density_SNIa = cellhydroproperties[index+1];
+	    }
+	else {
+	    index = ad.Nhydroproperties-1;
+	    agp->metal_density_SNII = cellhydroproperties[index];
+	    }
+	}
     agp->potential = 0;
-    agp->potentialhydro = 0;
-    if (ad.ELECTRON_ION_NONEQUILIBRIUM) agp->electroninternalenergy = cellhydroproperties[8];
+    agp->potential_hydro = 0;
     if (ad.GRAVITY || ad.RADIATIVE_TRANSFER) {
 	if (ad.GRAVITY) agp->potential = cellotherproperties[0];
-	if (ad.HYDRO) agp->potentialhydro = cellotherproperties[1];
+	if (ad.HYDRO) agp->potential_hydro = cellotherproperties[1];
 	}
     }
 
@@ -467,18 +623,18 @@ void read_art_nb_star_properties(ART_DATA ad, ART_STAR_PROPERTIES *asp) {
     float fdummy;
 
     asp->mass = 0;
-    asp->initialmass = 0;
-    asp->tform = 0;
-    asp->metallicitySNII = 0;
-    asp->metallicitySNIa = 0;
+    asp->initial_mass = 0;
+    asp->t_form = 0;
+    asp->metallicity_SNII = 0;
+    asp->metallicity_SNIa = 0;
     for (i = 0; i < ad.Nstarproperties; i++) {
 	assert(fread(&fdummy,sizeof(float),1,ad.StarPropertiesFile[i]) == 1);
 	if (ad.doswap) reorder(&fdummy,sizeof(float),1);
 	if (i == 0) asp->mass = fdummy;
-	else if (i == 1) asp->initialmass = fdummy;
-	else if (i == 2) asp->tform = fdummy;
-	else if (i == 3) asp->metallicitySNII = fdummy;
-	else if (i == 4) asp->metallicitySNIa = fdummy;
+	else if (i == 1) asp->initial_mass = fdummy;
+	else if (i == 2) asp->t_form = fdummy;
+	else if (i == 3) asp->metallicity_SNII = fdummy;
+	else if (i == 4) asp->metallicity_SNIa = fdummy;
 	}
     }
 
