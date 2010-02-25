@@ -16,10 +16,22 @@
 typedef struct physical_constants {
 
     double GNewton;
-    double GNewtonCosmology;
+    double GNewton_Cosmology;
     double k_Boltzmann;
     double m_Proton;
+    double m_Neutron;
+    double m_Electron;
+    double Mo;
+    double Lo;
+    double rho_crit;
+    double rho_crit_Cosmology;
     } PHYSICAL_CONSTANTS;
+
+typedef struct conversion_factors {
+
+    double km_per_s_2_kpc_per_Gyr;
+    double kpc_per_Gyr_2_km_per_s;
+    } CONVERSION_FACTORS;
 
 typedef struct cosmological_parameters {
 
@@ -65,6 +77,7 @@ typedef struct coordinate_transformation {
 */
 
 const PHYSICAL_CONSTANTS PhysicalConstants;
+const CONVERSION_FACTORS ConversionFactors;
 
 /*
 ** Function for flipping bytes depending on endianness
