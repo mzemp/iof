@@ -10,15 +10,16 @@
 #define IOF_AUXILIARY_H
 
 /*
-** Physical constants
-*/ 
-
-#define k_BOLTZMANN 1.3806503e-23
-#define PROTON_MASS 1.6726216e-27
-
-/*
 ** Structures
 */
+
+typedef struct physical_constants {
+
+    double GNewton;
+    double GNewtonCosmology;
+    double k_Boltzmann;
+    double m_Proton;
+    } PHYSICAL_CONSTANTS;
 
 typedef struct cosmological_parameters {
 
@@ -38,6 +39,33 @@ typedef struct unit_system {
     double rhocrit0;
     } UNIT_SYSTEM;
 
+typedef struct coordinate_transformation {
+
+    /*
+    ** Unit scale factors
+    */
+    double L_usf;
+    double T_usf;
+    double V_usf;
+    double M_usf;
+    /*
+    ** Coordinate system scale factors
+    */
+    double L_cssf;
+    double V_cssf;
+    /*
+    ** Coordinate system shifts
+    */
+    double L_css[3];
+    double V_css[3];
+    } COORDINATE_TRANSFORMATION;
+
+/*
+** Constant structures
+*/
+
+const PHYSICAL_CONSTANTS PhysicalConstants;
+
 /*
 ** Function for flipping bytes depending on endianness
 */
@@ -55,5 +83,17 @@ double correct_position(double, double, double);
 */
 
 double put_in_box(double, double, double);
+
+/*
+** Setting default values for coordinate transforamtion (i.e. no transformation)
+*/
+
+void set_default_values_coordinate_transformation(COORDINATE_TRANSFORMATION *);
+
+/*
+** Function for calculating units transformation
+*/
+
+void calculate_units_transformation(UNIT_SYSTEM, UNIT_SYSTEM, COORDINATE_TRANSFORMATION *);
 
 #endif /* IOF_AUXILIARY_H */
