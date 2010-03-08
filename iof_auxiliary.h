@@ -41,6 +41,7 @@ typedef struct cosmological_parameters {
     double OmegaL0;
     double OmegaK0;
     double OmegaR0;
+    double h0_100;
     } COSMOLOGICAL_PARAMETERS;
 
 typedef struct unit_system {
