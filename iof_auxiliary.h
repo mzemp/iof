@@ -110,4 +110,16 @@ void set_default_values_coordinate_transformation(COORDINATE_TRANSFORMATION *);
 
 void calculate_units_transformation(UNIT_SYSTEM, UNIT_SYSTEM, COORDINATE_TRANSFORMATION *);
 
+/*
+** Function for calculating E function used throughout cosmology
+*/
+
+double Ecosmo(double a, COSMOLOGICAL_PARAMETERS cp);
+
+/*
+** Function for calculating unit vectors for spherical coordinates
+*/
+
+void calculate_unit_vectors_spherical(double *, double *, double *, double *);
+
 #endif /* IOF_AUXILIARY_H */

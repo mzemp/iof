@@ -117,3 +117,51 @@ void calculate_units_transformation(UNIT_SYSTEM fromus, UNIT_SYSTEM tous, COORDI
     ct->V_usf = ct->L_usf/ct->T_usf;
     ct->M_usf = tous.rhocrit0/fromus.rhocrit0*pow(ct->L_usf,3);
     }
+
+/*
+** Function for calculating E function used throughout cosmology
+*/
+
+double Ecosmo(double a, COSMOLOGICAL_PARAMETERS cp) {
+
+    return sqrt(cp.OmegaM0*pow(a,-3) + cp.OmegaL0 + cp.OmegaK0*pow(a,-2) + cp.OmegaR0*pow(a,-4));
+    }
+
+/*
+** Function for calculating unit vectors for spherical coordinates
+*/
+
+void calculate_unit_vectors_spherical(double pos[3], double erad[3], double ephi[3], double etheta[3]) {
+
+    double dist;
+    double cosphi, sinphi, costheta, sintheta;
+
+    /*
+    ** Calculate cosphi & sinphi
+    */
+    dist = sqrt(pos[0]*pos[0]+pos[1]*pos[1]);
+    cosphi = pos[0]/dist;
+    sinphi = pos[1]/dist;
+    if ((pos[0] == 0) && (pos[1] == 0)) {
+        cosphi = 1;
+        sinphi = 0;
+        }
+    /*
+    ** Calculate costheta & sintheta
+    */
+    dist = sqrt(pos[0]*pos[0]+pos[1]*pos[1]+pos[2]*pos[2]);
+    costheta = pos[2]/dist;
+    sintheta = sqrt(1-costheta*costheta);
+    /*
+    ** Calculate unit vectors
+    */
+    erad[0] = sintheta*cosphi;
+    erad[1] = sintheta*sinphi;
+    erad[2] = costheta;
+    ephi[0] = -sinphi;
+    ephi[1] = cosphi;
+    ephi[2] = 0;
+    etheta[0] = -costheta*cosphi;
+    etheta[1] = -costheta*sinphi;
+    etheta[2] = sintheta;
+    }
