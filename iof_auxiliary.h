@@ -47,7 +47,6 @@ typedef struct cosmological_parameters {
 typedef struct unit_system {
 
     double LBox;
-    double GNewton;
     double Hubble0;
     double rhocrit0;
     } UNIT_SYSTEM;
