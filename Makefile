@@ -1,11 +1,11 @@
-# Makefile for IOfunctions
+# Makefile for iof library
 
 NAME	= iof
 SOURCES = iof_auxiliary.c iof_tipsy.c iof_gadget.c iof_art.c iof_array.c	
 VERSION = 1.9
 
 CC	= gcc
-CFLAGS	= -O3 -Wall
+CFLAGS	= -O3 -mcmodel=medium -Wall
 LIBS	=
 
 # Rules

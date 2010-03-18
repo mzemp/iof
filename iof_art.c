@@ -297,6 +297,8 @@ void read_art_nb_gas_header(ART_DATA *ad, int index) {
     if (ad->doswap) reorder(&trailer,sizeof(int),1);
     assert(header == trailer);
     ad->Nlevelgas = ad->Lmaxgas-ad->Lmingas+1;
+    assert(ad->Lmingas >= 0);
+    assert(ad->Lmaxgas >= ad->Lmingas);
     /*
     ** tl
     */
@@ -403,6 +405,12 @@ void read_art_nb_gas_header(ART_DATA *ad, int index) {
 	if (ad->doswap) reorder(&trailer,sizeof(int),1);
 	assert(header == trailer);
 	}
+    else {
+	for (i = 0; i < ad->Ndim; i++) {
+	    ad->starformationvolumemin[i] = 0;
+	    ad->starformationvolumemax[i] = 0;
+	    }
+	}
     }
 
 void read_art_nb_gas_header_level(ART_DATA *ad, int level, int **cellrefinedin) {
@@ -410,7 +418,7 @@ void read_art_nb_gas_header_level(ART_DATA *ad, int level, int **cellrefinedin) 
     int header, trailer;
     int i;
     int idummy;
-    int *cellrefined;
+    int *cellrefined = NULL;
     long int lidummy;
 
     assert(ad->Lmingas == 0);
