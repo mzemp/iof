@@ -51,11 +51,11 @@ typedef struct art_header {
     float OmB0;  
     float mass[10];
     unsigned int num[10];
-    float zero1;
+    float magic1;
     float DelDC;
     float abox;   /* Scale factor in the box */
     float Hbox;   /* Hubble constant in the box */
-    float zero2;
+    float magic2;
     float fill[75];
     } ART_HEADER;
 
