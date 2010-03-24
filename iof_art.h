@@ -70,12 +70,12 @@ typedef struct art_gas_properties {
     double electron_internal_energy;
     double potential;
     double potential_hydro;
-    double HI_number_density;
-    double HII_number_density;
-    double HeI_number_density;
-    double HeII_number_density;
-    double HeIII_number_density;
-    double H2_number_density;
+    double HI_density;
+    double HII_density;
+    double HeI_density;
+    double HeII_density;
+    double HeIII_density;
+    double H2_density;
     double metal_density_SNII;
     double metal_density_SNIa;
     } ART_GAS_PROPERTIES;

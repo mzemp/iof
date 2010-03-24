@@ -587,22 +587,22 @@ void read_art_nb_gas_properties(ART_DATA ad, ART_GAS_PROPERTIES *agp) {
     agp->internal_energy = cellhydroproperties[7];
     agp->electron_internal_energy = 0;
     if (ad.ELECTRON_ION_NONEQUILIBRIUM) agp->electron_internal_energy = cellhydroproperties[8];
-    agp->HI_number_density = 0;
-    agp->HII_number_density = 0;
-    agp->HeI_number_density = 0;
-    agp->HeII_number_density = 0;
-    agp->HeIII_number_density = 0;
-    agp->H2_number_density = 0;
+    agp->HI_density = 0;
+    agp->HII_density = 0;
+    agp->HeI_density = 0;
+    agp->HeII_density = 0;
+    agp->HeIII_density = 0;
+    agp->H2_density = 0;
     if (ad.Nrtchemspecies > 0) {
 	assert(ad.Nrtchemspecies == 6);
 	if (ad.ELECTRON_ION_NONEQUILIBRIUM) index = 9;
 	else index = 8;
-	agp->HI_number_density    = cellhydroproperties[index];
-	agp->HII_number_density   = cellhydroproperties[index+1];
-	agp->HeI_number_density   = cellhydroproperties[index+2];
-	agp->HeII_number_density  = cellhydroproperties[index+3];
-	agp->HeIII_number_density = cellhydroproperties[index+4];
-	agp->H2_number_density    = cellhydroproperties[index+5];
+	agp->HI_density    = cellhydroproperties[index];
+	agp->HII_density   = cellhydroproperties[index+1];
+	agp->HeI_density   = cellhydroproperties[index+2];
+	agp->HeII_density  = cellhydroproperties[index+3];
+	agp->HeIII_density = cellhydroproperties[index+4];
+	agp->H2_density    = cellhydroproperties[index+5]*2; /* only half the mass density written out */
 	}
     agp->metal_density_SNII = 0;
     agp->metal_density_SNIa = 0;
