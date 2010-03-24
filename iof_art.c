@@ -597,12 +597,16 @@ void read_art_nb_gas_properties(ART_DATA ad, ART_GAS_PROPERTIES *agp) {
 	assert(ad.Nrtchemspecies == 6);
 	if (ad.ELECTRON_ION_NONEQUILIBRIUM) index = 9;
 	else index = 8;
+	/*
+	** What is written out for species j is X_j * gas_density where X_j = N_j / N_Nucleons
+	** => need to multiply with number of nucleons of species j to get the mass density
+	*/
 	agp->HI_density    = cellhydroproperties[index];
 	agp->HII_density   = cellhydroproperties[index+1];
-	agp->HeI_density   = cellhydroproperties[index+2];
-	agp->HeII_density  = cellhydroproperties[index+3];
-	agp->HeIII_density = cellhydroproperties[index+4];
-	agp->H2_density    = cellhydroproperties[index+5]*2; /* only half the mass density written out */
+	agp->HeI_density   = cellhydroproperties[index+2]*4;
+	agp->HeII_density  = cellhydroproperties[index+3]*4;
+	agp->HeIII_density = cellhydroproperties[index+4]*4;
+	agp->H2_density    = cellhydroproperties[index+5]*2;
 	}
     agp->metal_density_SNII = 0;
     agp->metal_density_SNIa = 0;
