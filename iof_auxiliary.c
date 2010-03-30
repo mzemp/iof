@@ -20,22 +20,22 @@
 
 const PHYSICAL_CONSTANTS PhysicalConstants = {
 
-    6.67428e-11,         // GNewton [m^3 s^[-2} kg^{-1}
-    4.4985021530e-6,     // GNewton_Cosmology [kpc^3 Gyr^{-2} Mo^{-1}]
-    1.3806504e-23,       // k_Boltzmann [J K^{-1}]
-    1.672621637e-27,     // m_Proton [kg]
-    1.67492729e-27,      // m_Neutron [kg]
-    9.10938215e-31,      // m_Electron [kg]
-    1.9884e30,           // Mo [kg]
-    3.845e26,            // Lo [J s^{-1}]
-    1.8783e-26,          // rho_crit [h_0^2 kg m^{-3}]
-    2.7753662719e2       // rho_crit_Cosmology [h_0^2 Mo kpc^{-3}]
+    6.67428e-11,         /* GNewton [m^3 s^[-2} kg^{-1} */
+    4.4985021530e-6,     /* GNewton_Cosmology [kpc^3 Gyr^{-2} Mo^{-1}] */
+    1.3806504e-23,       /* k_Boltzmann [J K^{-1}] */
+    1.672621637e-27,     /* m_Proton [kg] */
+    1.67492729e-27,      /* m_Neutron [kg] */
+    9.10938215e-31,      /* m_Electron [kg] */
+    1.9884e30,           /* Mo [kg] */
+    3.845e26,            /* Lo [J s^{-1}] */
+    1.8783e-26,          /* rho_crit [h_0^2 kg m^{-3}] */
+    2.7753662719e2       /* rho_crit_Cosmology [h_0^2 Mo kpc^{-3}] */
     };
 
 const CONVERSION_FACTORS ConversionFactors = {
 
-    1.02271216511,       // km_per_s_2_kpc_per_Gyr
-    0.97779222216        // kpc_per_Gyr_2_km_per_s
+    1.02271216511,       /* km_per_s_2_kpc_per_Gyr */
+    0.97779222216        /* kpc_per_Gyr_2_km_per_s */
     };
 
 /*

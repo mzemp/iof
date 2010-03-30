@@ -568,7 +568,12 @@ void read_art_nb_coordinates_record(ART_DATA ad, ART_COORDINATES *coordinates) {
 void read_art_nb_gas_properties(ART_DATA ad, ART_GAS_PROPERTIES *agp) {
 
     int index;
-    float cellhydroproperties[ad.Nhydroproperties], cellotherproperties[ad.Notherproperties];
+    float *cellhydroproperties, *cellotherproperties;
+
+    cellhydroproperties = malloc(ad.Nhydroproperties*sizeof(float));
+    assert(cellhydroproperties != NULL);
+    cellotherproperties = malloc(ad.Notherproperties*sizeof(float));
+    assert(cellotherproperties != NULL);
 
     assert(fread(&cellhydroproperties,sizeof(float),ad.Nhydroproperties,ad.GasFile[0]) == ad.Nhydroproperties);
     if (ad.doswap) reorder(&cellhydroproperties,sizeof(float),ad.Nhydroproperties);
@@ -627,6 +632,8 @@ void read_art_nb_gas_properties(ART_DATA ad, ART_GAS_PROPERTIES *agp) {
 	if (ad.GRAVITY) agp->potential = cellotherproperties[0];
 	if (ad.HYDRO) agp->potential_hydro = cellotherproperties[1];
 	}
+    free(cellhydroproperties);
+    free(cellotherproperties);
     }
 
 void read_art_nb_star_properties(ART_DATA ad, ART_STAR_PROPERTIES *asp) {
