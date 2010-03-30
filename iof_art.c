@@ -575,11 +575,11 @@ void read_art_nb_gas_properties(ART_DATA ad, ART_GAS_PROPERTIES *agp) {
     cellotherproperties = malloc(ad.Notherproperties*sizeof(float));
     assert(cellotherproperties != NULL);
 
-    assert(fread(&cellhydroproperties,sizeof(float),ad.Nhydroproperties,ad.GasFile[0]) == ad.Nhydroproperties);
-    if (ad.doswap) reorder(&cellhydroproperties,sizeof(float),ad.Nhydroproperties);
+    assert(fread(cellhydroproperties,sizeof(float),ad.Nhydroproperties,ad.GasFile[0]) == ad.Nhydroproperties);
+    if (ad.doswap) reorder(cellhydroproperties,sizeof(float),ad.Nhydroproperties);
     if (ad.GRAVITY || ad.RADIATIVE_TRANSFER) {
-	assert(fread(&cellotherproperties,sizeof(float),ad.Notherproperties,ad.GasFile[1]) == ad.Notherproperties);
-	if (ad.doswap) reorder(&cellotherproperties,sizeof(float),ad.Notherproperties);
+	assert(fread(cellotherproperties,sizeof(float),ad.Notherproperties,ad.GasFile[1]) == ad.Notherproperties);
+	if (ad.doswap) reorder(cellotherproperties,sizeof(float),ad.Notherproperties);
 	}
 
     agp->gas_density = cellhydroproperties[0];
