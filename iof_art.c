@@ -691,13 +691,6 @@ void move_art_nb_gas_filepositions_level_end(ART_DATA ad, int level) {
     
     assert(fread(&trailer,sizeof(int),1,ad.GasFile[1]) == 1);
     if (ad.doswap) reorder(&trailer,sizeof(int),1);
-
-    if (level == ad.Lmaxgas) {
-	fclose(ad.GasFile[0]);
-	if (ad.GRAVITY || ad.RADIATIVE_TRANSFER) {
-	    fclose(ad.GasFile[1]);
-	    }
-	}
     }
 
 void move_art_nb_star_filepositions_begin(ART_DATA ad) {
@@ -724,6 +717,5 @@ void move_art_nb_star_filepositions_end(ART_DATA ad) {
 	assert(fread(&trailer,sizeof(int),1,ad.StarPropertiesFile[i]) == 1);
 	if (ad.doswap) reorder(&trailer,sizeof(int),1);
 	assert(trailer == ad.Nstar*sizeof(float));
-	fclose(ad.StarPropertiesFile[i]);
 	}
     }
