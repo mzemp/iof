@@ -153,6 +153,8 @@ void calculate_unit_vectors_spherical(double pos[3], double erad[3], double ephi
     costheta = pos[2]/dist;
     sintheta = sqrt(1-costheta*costheta);
     if (dist == 0) {
+	cosphi = 0;
+	sinphi = 0;
 	costheta = 0;
 	sintheta = 0;
 	}
