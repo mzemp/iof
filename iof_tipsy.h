@@ -19,11 +19,11 @@
 typedef struct tipsy_header {
 
     double time;
-    int ntotal;
-    int ndim;
-    int ngas;
-    int ndark;
-    int nstar;
+    unsigned int ntotal;
+    unsigned int ndim;
+    unsigned int ngas;
+    unsigned int ndark;
+    unsigned int nstar;
     } TIPSY_HEADER;
 
 typedef struct tipsy_gas_particle {

@@ -351,11 +351,11 @@ void read_tipsy_xdr_header(XDR *xdrs, TIPSY_HEADER *th) {
     int pad;
 
     assert(xdr_double(xdrs,&th->time) == 1);
-    assert(xdr_int(xdrs,&th->ntotal) == 1);
-    assert(xdr_int(xdrs,&th->ndim) == 1);
-    assert(xdr_int(xdrs,&th->ngas) == 1);
-    assert(xdr_int(xdrs,&th->ndark) == 1);
-    assert(xdr_int(xdrs,&th->nstar) == 1);
+    assert(xdr_u_int(xdrs,&th->ntotal) == 1);
+    assert(xdr_u_int(xdrs,&th->ndim) == 1);
+    assert(xdr_u_int(xdrs,&th->ngas) == 1);
+    assert(xdr_u_int(xdrs,&th->ndark) == 1);
+    assert(xdr_u_int(xdrs,&th->nstar) == 1);
     assert(xdr_int(xdrs,&pad) == 1);
     }
 
@@ -610,11 +610,11 @@ void write_tipsy_xdr_header(XDR *xdrs, TIPSY_HEADER *th) {
     int pad = 0;
 
     assert(xdr_double(xdrs,&th->time) == 1);
-    assert(xdr_int(xdrs,&th->ntotal) == 1);
-    assert(xdr_int(xdrs,&th->ndim) == 1);
-    assert(xdr_int(xdrs,&th->ngas) == 1);
-    assert(xdr_int(xdrs,&th->ndark) == 1);
-    assert(xdr_int(xdrs,&th->nstar) == 1);
+    assert(xdr_u_int(xdrs,&th->ntotal) == 1);
+    assert(xdr_u_int(xdrs,&th->ndim) == 1);
+    assert(xdr_u_int(xdrs,&th->ngas) == 1);
+    assert(xdr_u_int(xdrs,&th->ndark) == 1);
+    assert(xdr_u_int(xdrs,&th->nstar) == 1);
     assert(xdr_int(xdrs,&pad) == 1);
     }
 
@@ -819,8 +819,8 @@ void read_tipsy_ascii(FILE *fp, TIPSY_STRUCTURE *ts) {
     */
     th = realloc(th,sizeof(TIPSY_HEADER));
     assert(th != NULL);
-    assert(fscanf(fp,"%d %d %d",&th->ntotal,&th->ngas,&th->nstar) == 3);
-    assert(fscanf(fp,"%d",&th->ndim) == 1);
+    assert(fscanf(fp,"%ud %ud %ud",&th->ntotal,&th->ngas,&th->nstar) == 3);
+    assert(fscanf(fp,"%ud",&th->ndim) == 1);
     assert(fscanf(fp,"%lf",&th->time) == 1);
     th->ndark = th->ntotal - th->ngas - th->nstar;
     /*
@@ -958,8 +958,8 @@ void read_tipsy_ascii_dpp(FILE *fp, TIPSY_STRUCTURE_DPP *tsdpp) {
     */
     th = realloc(th,sizeof(TIPSY_HEADER));
     assert(th != NULL);
-    assert(fscanf(fp,"%d %d %d",&th->ntotal,&th->ngas,&th->nstar) == 3);
-    assert(fscanf(fp,"%d",&th->ndim) == 1);
+    assert(fscanf(fp,"%ud %ud %ud",&th->ntotal,&th->ngas,&th->nstar) == 3);
+    assert(fscanf(fp,"%ud",&th->ndim) == 1);
     assert(fscanf(fp,"%lf",&th->time) == 1);
     th->ndark = th->ntotal - th->ngas - th->nstar;
     /*
