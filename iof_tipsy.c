@@ -819,8 +819,8 @@ void read_tipsy_ascii(FILE *fp, TIPSY_STRUCTURE *ts) {
     */
     th = realloc(th,sizeof(TIPSY_HEADER));
     assert(th != NULL);
-    assert(fscanf(fp,"%ud %ud %ud",&th->ntotal,&th->ngas,&th->nstar) == 3);
-    assert(fscanf(fp,"%ud",&th->ndim) == 1);
+    assert(fscanf(fp,"%u %u %u",&th->ntotal,&th->ngas,&th->nstar) == 3);
+    assert(fscanf(fp,"%u",&th->ndim) == 1);
     assert(fscanf(fp,"%lf",&th->time) == 1);
     th->ndark = th->ntotal - th->ngas - th->nstar;
     /*
@@ -958,8 +958,8 @@ void read_tipsy_ascii_dpp(FILE *fp, TIPSY_STRUCTURE_DPP *tsdpp) {
     */
     th = realloc(th,sizeof(TIPSY_HEADER));
     assert(th != NULL);
-    assert(fscanf(fp,"%ud %ud %ud",&th->ntotal,&th->ngas,&th->nstar) == 3);
-    assert(fscanf(fp,"%ud",&th->ndim) == 1);
+    assert(fscanf(fp,"%u %u %u",&th->ntotal,&th->ngas,&th->nstar) == 3);
+    assert(fscanf(fp,"%u",&th->ndim) == 1);
     assert(fscanf(fp,"%lf",&th->time) == 1);
     th->ndark = th->ntotal - th->ngas - th->nstar;
     /*
