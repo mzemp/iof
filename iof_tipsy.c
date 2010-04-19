@@ -1095,8 +1095,8 @@ void write_tipsy_ascii(FILE *fp, const TIPSY_STRUCTURE *ts) {
     /*
     ** Write out header
     */
-    assert(fprintf(fp,"%d %d %d\n",th->ntotal,th->ngas,th->nstar) > 0);
-    assert(fprintf(fp,"%d\n",3) > 0);
+    assert(fprintf(fp,"%u %u %u\n",th->ntotal,th->ngas,th->nstar) > 0);
+    assert(fprintf(fp,"%u\n",3) > 0);
     assert(fprintf(fp,"%.6e\n",th->time) > 0);
     /*
     ** Write out masses
@@ -1200,8 +1200,8 @@ void write_tipsy_ascii_dpp(FILE *fp, const TIPSY_STRUCTURE_DPP *tsdpp) {
     /*
     ** Write out header
     */
-    assert(fprintf(fp,"%d %d %d\n",th->ntotal,th->ngas,th->nstar) > 0);
-    assert(fprintf(fp,"%d\n",3) > 0);
+    assert(fprintf(fp,"%u %u %u\n",th->ntotal,th->ngas,th->nstar) > 0);
+    assert(fprintf(fp,"%u\n",3) > 0);
     assert(fprintf(fp,"%.6e\n",th->time) > 0);
     /*
     ** Write out masses
