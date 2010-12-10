@@ -171,3 +171,49 @@ void calculate_unit_vectors_spherical(double pos[3], double erad[3], double ephi
     etheta[1] = -costheta*sinphi;
     etheta[2] = sintheta;
     }
+
+/*
+** Function for calculating unit vectors for cylindrical coordinates
+*/
+
+void calculate_unit_vectors_cylindrical(double pos[3], double ezin[3], double erad[3], double ephi[3], double ez[3]) {
+
+    int i;
+    double dist, distv;
+    double vec[3];
+
+    /*
+    ** Normalise z component
+    */
+    dist = 1.0/sqrt(ezin[0]*ezin[0]+ezin[1]*ezin[1]+ezin[2]*ezin[2]);
+    for (i = 0; i < 3; i++) ez[i] = ezin[i]*dist;
+    /*
+    ** Calculate radial component
+    */
+    dist = pos[0]*ez[0]+pos[1]*ez[1]+pos[2]*ez[2];
+    if (fabs(dist-sqrt(pos[0]*pos[0]+pos[1]*pos[1]+pos[2]*pos[2])) < 1e-10) {
+	/*
+	** Alingned with z component 
+	** => asign random vector perpendicular to z component
+	*/
+	vec[0] = ez[0]+ez[1];
+	vec[1] = ez[1]+ez[2];
+	vec[2] = ez[2]+ez[0];
+	distv = vec[0]*ez[0]+vec[1]*ez[1]+vec[2]*ez[2];
+	for (i = 0; i < 3; i++) erad[i] = vec[i]-distv*ez[i];
+	}
+    else {
+	for (i = 0; i < 3; i++) erad[i] = pos[i]-dist*ez[i];
+	}
+    /*
+    ** Normalise radial component
+    */
+    dist = 1.0/sqrt(erad[0]*erad[0]+erad[1]*erad[1]+erad[2]*erad[2]);
+    for (i = 0; i < 3; i++) erad[i] = erad[i]*dist;
+    /*
+    ** Calculate phi component as a cross product e_z x e_rad
+    */
+    ephi[0] = ez[1]*erad[2]-ez[2]*erad[1];
+    ephi[1] = ez[2]*erad[0]-ez[0]*erad[2];
+    ephi[2] = ez[0]*erad[1]-ez[1]*erad[0];
+    }

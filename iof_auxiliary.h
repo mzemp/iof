@@ -121,4 +121,10 @@ double Ecosmo(double a, COSMOLOGICAL_PARAMETERS cp);
 
 void calculate_unit_vectors_spherical(double *, double *, double *, double *);
 
+/*
+** Function for calculating unit vectors for cylindrical coordinates
+*/
+
+void calculate_unit_vectors_cylindrical(double *, double *, double *, double *, double *);
+
 #endif /* IOF_AUXILIARY_H */
