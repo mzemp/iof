@@ -32,6 +32,7 @@ void set_default_values_art_data(ART_DATA *ad) {
 
     int i;
 
+    ad->particle_file_mode = 0;
     ad->doswap = 0;
     ad->gascontained = 0;
     ad->darkcontained = 0;
@@ -531,37 +532,72 @@ void read_art_nb_coordinates_record(ART_DATA ad, ART_COORDINATES *coordinates) {
 
     int i;
     float fdummy;
+    double ddummy;
 
     assert(ad.CoordinatesDataFile != NULL);
-    for (i = 0; i < ad.Nparticleperrecord; i++) {
-	assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
-	if (ad.doswap) reorder(&fdummy,sizeof(float),1);
-	coordinates[i].r[0] = fdummy;
+    if (ad.particle_file_mode < 2) {
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&ddummy,sizeof(double),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&ddummy,sizeof(double),1);
+	    coordinates[i].r[0] = ddummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&ddummy,sizeof(double),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&ddummy,sizeof(double),1);
+	    coordinates[i].r[1] = ddummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&ddummy,sizeof(double),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&ddummy,sizeof(double),1);
+	    coordinates[i].r[2] = ddummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&ddummy,sizeof(double),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&ddummy,sizeof(double),1);
+	    coordinates[i].v[0] = ddummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&ddummy,sizeof(double),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&ddummy,sizeof(double),1);
+	    coordinates[i].v[1] = ddummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&ddummy,sizeof(double),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&ddummy,sizeof(double),1);
+	    coordinates[i].v[2] = ddummy;
+	    }
 	}
-    for (i = 0; i < ad.Nparticleperrecord; i++) {
-	assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
-	if (ad.doswap) reorder(&fdummy,sizeof(float),1);
-	coordinates[i].r[1] = fdummy;
-	}
-    for (i = 0; i < ad.Nparticleperrecord; i++) {
-	assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
-	if (ad.doswap) reorder(&fdummy,sizeof(float),1);
-	coordinates[i].r[2] = fdummy;
-	}
-    for (i = 0; i < ad.Nparticleperrecord; i++) {
-	assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
-	if (ad.doswap) reorder(&fdummy,sizeof(float),1);
-	coordinates[i].v[0] = fdummy;
-	}
-    for (i = 0; i < ad.Nparticleperrecord; i++) {
-	assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
-	if (ad.doswap) reorder(&fdummy,sizeof(float),1);
-	coordinates[i].v[1] = fdummy;
-	}
-    for (i = 0; i < ad.Nparticleperrecord; i++) {
-	assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
-	if (ad.doswap) reorder(&fdummy,sizeof(float),1);
-	coordinates[i].v[2] = fdummy;
+    else if (ad.particle_file_mode == 2) {
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&fdummy,sizeof(float),1);
+	    coordinates[i].r[0] = fdummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&fdummy,sizeof(float),1);
+	    coordinates[i].r[1] = fdummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&fdummy,sizeof(float),1);
+	    coordinates[i].r[2] = fdummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&fdummy,sizeof(float),1);
+	    coordinates[i].v[0] = fdummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&fdummy,sizeof(float),1);
+	    coordinates[i].v[1] = fdummy;
+	    }
+	for (i = 0; i < ad.Nparticleperrecord; i++) {
+	    assert(fread(&fdummy,sizeof(float),1,ad.CoordinatesDataFile) == 1);
+	    if (ad.doswap) reorder(&fdummy,sizeof(float),1);
+	    coordinates[i].v[2] = fdummy;
+	    }
 	}
     }
 

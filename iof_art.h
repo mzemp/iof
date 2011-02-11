@@ -54,7 +54,7 @@ typedef struct art_header {
     float magic1;
     float DelDC;
     float abox;   /* Scale factor in the box */
-    float Hbox;   /* Hubble constant in the box */
+    float Hbox;   /* Hubble parameter in the box */
     float magic2;
     float fill[75];
     } ART_HEADER;
@@ -124,6 +124,7 @@ typedef struct art_data {
     /*
     ** derived stuff to get data better organised
     */
+    int particle_file_mode;
     int doswap;
     int gascontained, darkcontained, starcontained;
     int Lmingas, Lmaxgas, Nlevelgas;
