@@ -191,16 +191,20 @@ void calculate_unit_vectors_cylindrical(double pos[3], double ezin[3], double er
     ** Calculate radial component
     */
     dist = pos[0]*ez[0]+pos[1]*ez[1]+pos[2]*ez[2];
-    if (fabs(dist-sqrt(pos[0]*pos[0]+pos[1]*pos[1]+pos[2]*pos[2])) < 1e-10) {
+    if (fabs(dist/sqrt(pos[0]*pos[0]+pos[1]*pos[1]+pos[2]*pos[2])) > 1-1e-15) {
 	/*
 	** Alingned with z component 
 	** => asign random vector perpendicular to z component
+	** and make sure that the radial component is never negative!
 	*/
 	vec[0] = ez[0]+ez[1];
 	vec[1] = ez[1]+ez[2];
 	vec[2] = ez[2]+ez[0];
 	distv = vec[0]*ez[0]+vec[1]*ez[1]+vec[2]*ez[2];
 	for (i = 0; i < 3; i++) erad[i] = vec[i]-distv*ez[i];
+	if (pos[0]*erad[0]+pos[1]*erad[1]+pos[2]*erad[2] < 0) {
+	    for (i = 0; i < 3; i++) erad[i] *= -1;
+	    }
 	}
     else {
 	for (i = 0; i < 3; i++) erad[i] = pos[i]-dist*ez[i];
