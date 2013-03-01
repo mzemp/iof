@@ -197,12 +197,14 @@ void calculate_unit_vectors_cylindrical(double pos[3], double ezin[3], double er
 	** => asign random vector perpendicular to z component
 	** and make sure that the radial component is never negative!
 	*/
-	vec[0] = ez[0]+ez[1];
-	vec[1] = ez[1]+ez[2];
-	vec[2] = ez[2]+ez[0];
+	vec[0] = rand();
+	vec[1] = rand();
+	vec[2] = rand();
 	distv = vec[0]*ez[0]+vec[1]*ez[1]+vec[2]*ez[2];
+	/* fprintf(stderr,"Close case\n"); */
 	for (i = 0; i < 3; i++) erad[i] = vec[i]-distv*ez[i];
 	if (pos[0]*erad[0]+pos[1]*erad[1]+pos[2]*erad[2] < 0) {
+	    /* fprintf(stderr,"Negative case\n"); */
 	    for (i = 0; i < 3; i++) erad[i] *= -1;
 	    }
 	}
