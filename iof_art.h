@@ -27,136 +27,136 @@ const double art_cell_delta[8][3];
 
 typedef struct art_header {
 
-    float aunin;
-    float auni0;
-    float amplt;
-    float astep;
-    int   istep;
-    float partw;
-    float tintg;
-    float ekin;
-    float ekin1;
-    float ekin2;
-    float au0;
-    float aeu0;
-    int   Nrow;
-    int   Ngrid;
-    int   Nspecies;
-    int   Nseed;
-    float OmM0;
-    float OmL0;
-    float h100;
-    float Wp5;
-    float OmK0;
-    float OmB0;  
-    float mass[10];
-    unsigned int num[10];
-    float magic1;
-    float DelDC;
-    float abox;   /* Scale factor in the box */
-    float Hbox;   /* Hubble parameter in the box */
-    float magic2;
-    float fill[75];
-    } ART_HEADER;
+	float aunin;
+	float auni0;
+	float amplt;
+	float astep;
+	int	  istep;
+	float partw;
+	float tintg;
+	float ekin;
+	float ekin1;
+	float ekin2;
+	float au0;
+	float aeu0;
+	int	  Nrow;
+	int	  Ngrid;
+	int	  Nspecies;
+	int	  Nseed;
+	float OmM0;
+	float OmL0;
+	float h100;
+	float Wp5;
+	float OmK0;
+	float OmB0;	 
+	float mass[10];
+	unsigned int num[10];
+	float magic1;
+	float DelDC;
+	float abox;	  /* Scale factor in the box */
+	float Hbox;	  /* Hubble parameter in the box */
+	float magic2;
+	float fill[75];
+	} ART_HEADER;
 
 typedef struct art_gas_properties {
 
-    double gas_density;
-    double gas_energy;
-    double momentum[3];
-    double pressure;
-    double gamma;
-    double internal_energy;
-    double electron_internal_energy;
-    double potential;
-    double potential_hydro;
-    double HI_density;
-    double HII_density;
-    double HeI_density;
-    double HeII_density;
-    double HeIII_density;
-    double H2_density;
-    double metal_density_SNII;
-    double metal_density_SNIa;
-    } ART_GAS_PROPERTIES;
+	double gas_density;
+	double gas_energy;
+	double momentum[3];
+	double pressure;
+	double gamma;
+	double internal_energy;
+	double electron_internal_energy;
+	double potential;
+	double potential_hydro;
+	double HI_density;
+	double HII_density;
+	double HeI_density;
+	double HeII_density;
+	double HeIII_density;
+	double H2_density;
+	double metal_density_SNII;
+	double metal_density_SNIa;
+	} ART_GAS_PROPERTIES;
 
 typedef struct art_star_properties {
 
-    double mass;
-    double initial_mass;
-    double t_form;
-    double metallicity_SNII;
-    double metallicity_SNIa;
-    } ART_STAR_PROPERTIES;
+	double mass;
+	double initial_mass;
+	double t_form;
+	double metallicity_SNII;
+	double metallicity_SNIa;
+	} ART_STAR_PROPERTIES;
 
 typedef struct art_coordinates {
 
-    double r[3];
-    double v[3];
-    } ART_COORDINATES;
+	double r[3];
+	double v[3];
+	} ART_COORDINATES;
 
 typedef struct art_sfc_info {
 
-    int nDim;
-    int num_grid;
-    int sfc_order;
-    int nBitsPerDim;
-    int nBits;
-    int max_sfc_index;
-    } ART_SFC_INFO;
+	int nDim;
+	int num_grid;
+	int sfc_order;
+	int nBitsPerDim;
+	int nBits;
+	int max_sfc_index;
+	} ART_SFC_INFO;
 
 typedef struct art_data {
 
-    /*
-    ** from general header
-    */
-    char Banner[ART_BANNER_LENGTH];
-    ART_HEADER ah;
-    /*
-    ** from star properties file
-    */
-    double totalstellarmass, totalstellarinitialmass;
-    /*
-    ** from gas file
-    */
-    double refinementvolumemin[3], refinementvolumemax[3];
-    double starformationvolumemin[3], starformationvolumemax[3];
-    /*
-    ** derived stuff to get data better organised
-    */
-    int particle_file_mode;
-    int doswap;
-    int gascontained, darkcontained, starcontained;
-    int Lmingas, Lmaxgas, Nlevelgas;
-    int Lmindark, Lmaxdark, Nleveldark;
-    int Ndim;
-    int Nparticleperrecord;
-    int Nrecord;
-    int Ndarklevel[ART_MAX_NUMBER_DARK_LEVELS];
-    int Nstarproperties;
-    int Nhydroproperties, Notherproperties;
-    int Nrtchemspecies, Nchemspecies, Nrtdiskvars;
-    long int Ngas, Ndark, Nstar;
-    long int Ncell[ART_MAX_NUMBER_GAS_LEVELS], Ncellrefined[ART_MAX_NUMBER_GAS_LEVELS];
-    double shift;
-    double rootcelllength;
-    double toplevelmassdark, toplevelsoftdark, refinementstepdark;
-    double massdark[ART_MAX_NUMBER_DARK_LEVELS];
-    double softdark[ART_MAX_NUMBER_DARK_LEVELS];
-    /*
-    ** ART preprocessor flags
-    */
-    int GRAVITY, HYDRO, ADVECT_SPECIES, STARFORM, ENRICH, ENRICH_SNIa, RADIATIVE_TRANSFER, ELECTRON_ION_NONEQUILIBRIUM;
-    /*
-    ** SFC info
-    */
-    ART_SFC_INFO asfci;
-    /*
-    ** ART files
-    */
-    char HeaderFileName[256], CoordinatesDataFileName[256], StarPropertiesFileName[256], GasFileName[256];
-    FILE *HeaderFile, *CoordinatesDataFile, *StarPropertiesFile[ART_MAX_NUMBER_STAR_PROPERTIES], *GasFile[ART_MAX_NUMBER_GAS_BLOCKS];
-    } ART_DATA;
+	/*
+	** from general header
+	*/
+	char Banner[ART_BANNER_LENGTH];
+	ART_HEADER ah;
+	/*
+	** from star properties file
+	*/
+	double totalstellarmass, totalstellarinitialmass;
+	/*
+	** from gas file
+	*/
+	double refinementvolumemin[3], refinementvolumemax[3];
+	double starformationvolumemin[3], starformationvolumemax[3];
+	/*
+	** derived stuff to get data better organised
+	*/
+	int particle_file_mode;
+	int doswap;
+	int gascontained, darkcontained, starcontained;
+	int Lmingas, Lmaxgas, Nlevelgas;
+	int Lmindark, Lmaxdark, Nleveldark;
+	int Ndim;
+	int Nparticleperrecord;
+	int Nrecord;
+	int Ndarklevel[ART_MAX_NUMBER_DARK_LEVELS];
+	int Nstarproperties;
+	int Nhydroproperties, Notherproperties;
+	int Nrtchemspecies, Nchemspecies, Nrtdiskvars;
+	long int Ngas, Ndark, Nstar;
+	long int Ncell[ART_MAX_NUMBER_GAS_LEVELS], Ncellrefined[ART_MAX_NUMBER_GAS_LEVELS];
+	double shift;
+	double rootcelllength;
+	double toplevelmassdark, toplevelsoftdark, refinementstepdark;
+	double massdark[ART_MAX_NUMBER_DARK_LEVELS];
+	double softdark[ART_MAX_NUMBER_DARK_LEVELS];
+	/*
+	** ART preprocessor flags
+	*/
+	int GRAVITY, HYDRO, ADVECT_SPECIES, STARFORM, ENRICH, ENRICH_SNIa, RADIATIVE_TRANSFER, ELECTRON_ION_NONEQUILIBRIUM;
+	/*
+	** SFC info
+	*/
+	ART_SFC_INFO asfci;
+	/*
+	** ART files
+	*/
+	char HeaderFileName[256], CoordinatesDataFileName[256], StarPropertiesFileName[256], GasFileName[256];
+	FILE *HeaderFile, *CoordinatesDataFile, *StarPropertiesFile[ART_MAX_NUMBER_STAR_PROPERTIES], *GasFile[ART_MAX_NUMBER_GAS_BLOCKS];
+	} ART_DATA;
 
 /*
 ** Functions

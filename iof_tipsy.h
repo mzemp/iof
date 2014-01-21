@@ -18,93 +18,93 @@
 
 typedef struct tipsy_header {
 
-    double time;
-    unsigned int ntotal;
-    unsigned int ndim;
-    unsigned int ngas;
-    unsigned int ndark;
-    unsigned int nstar;
-    } TIPSY_HEADER;
+	double time;
+	unsigned int ntotal;
+	unsigned int ndim;
+	unsigned int ngas;
+	unsigned int ndark;
+	unsigned int nstar;
+	} TIPSY_HEADER;
 
 typedef struct tipsy_gas_particle {
 
-    float mass;
-    float pos[3];
-    float vel[3];
-    float rho;
-    float temp;
-    float hsmooth;
-    float metals;
-    float phi;
-    } TIPSY_GAS_PARTICLE;
+	float mass;
+	float pos[3];
+	float vel[3];
+	float rho;
+	float temp;
+	float hsmooth;
+	float metals;
+	float phi;
+	} TIPSY_GAS_PARTICLE;
 
 typedef struct tipsy_dark_particle {
 
-    float mass;
-    float pos[3];
-    float vel[3];
-    float eps;
-    float phi;
-    } TIPSY_DARK_PARTICLE;
+	float mass;
+	float pos[3];
+	float vel[3];
+	float eps;
+	float phi;
+	} TIPSY_DARK_PARTICLE;
 
 typedef struct tipsy_star_particle {
 
-    float mass;
-    float pos[3];
-    float vel[3];
-    float metals;
-    float tform;
-    float eps;
-    float phi;
-    } TIPSY_STAR_PARTICLE;
+	float mass;
+	float pos[3];
+	float vel[3];
+	float metals;
+	float tform;
+	float eps;
+	float phi;
+	} TIPSY_STAR_PARTICLE;
 
 typedef struct tipsy_gas_particle_dpp {
 
-    float mass;
-    double pos[3];
-    float vel[3];
-    float rho;
-    float temp;
-    float hsmooth;
-    float metals;
-    float phi;
-    } TIPSY_GAS_PARTICLE_DPP;
+	float mass;
+	double pos[3];
+	float vel[3];
+	float rho;
+	float temp;
+	float hsmooth;
+	float metals;
+	float phi;
+	} TIPSY_GAS_PARTICLE_DPP;
 
 typedef struct tipsy_dark_particle_dpp {
 
-    float mass;
-    double pos[3];
-    float vel[3];
-    float eps;
-    float phi;
-    } TIPSY_DARK_PARTICLE_DPP;
+	float mass;
+	double pos[3];
+	float vel[3];
+	float eps;
+	float phi;
+	} TIPSY_DARK_PARTICLE_DPP;
 
 typedef struct tipsy_star_particle_dpp {
 
-    float mass;
-    double pos[3];
-    float vel[3];
-    float metals;
-    float tform;
-    float eps;
-    float phi;
-    } TIPSY_STAR_PARTICLE_DPP;
+	float mass;
+	double pos[3];
+	float vel[3];
+	float metals;
+	float tform;
+	float eps;
+	float phi;
+	} TIPSY_STAR_PARTICLE_DPP;
 
 typedef struct tipsy_structure {
 
-    TIPSY_HEADER *th;
-    TIPSY_GAS_PARTICLE *tgp;
-    TIPSY_DARK_PARTICLE *tdp;
-    TIPSY_STAR_PARTICLE *tsp;
-    } TIPSY_STRUCTURE;
+	TIPSY_HEADER *th;
+	TIPSY_GAS_PARTICLE *tgp;
+	TIPSY_DARK_PARTICLE *tdp;
+	TIPSY_STAR_PARTICLE *tsp;
+	} TIPSY_STRUCTURE;
 
 typedef struct tipsy_structure_dpp {
 
-    TIPSY_HEADER *th;
-    TIPSY_GAS_PARTICLE_DPP *tgpdpp;
-    TIPSY_DARK_PARTICLE_DPP *tdpdpp;
-    TIPSY_STAR_PARTICLE_DPP *tspdpp;
-    } TIPSY_STRUCTURE_DPP;
+	TIPSY_HEADER *th;
+	TIPSY_GAS_PARTICLE_DPP *tgpdpp;
+	TIPSY_DARK_PARTICLE_DPP *tdpdpp;
+	TIPSY_STAR_PARTICLE_DPP *tspdpp;
+	} TIPSY_STRUCTURE_DPP;
 
 /*
 ** Functions

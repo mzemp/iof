@@ -18,7 +18,7 @@ extern "C" {
 #include <../iof/iof_array.h>
 
 #ifdef __cplusplus
-}
+	}
 #endif
 
 #endif /* IOF_H */

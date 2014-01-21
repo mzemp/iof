@@ -4,7 +4,7 @@ NAME	= iof
 SOURCES = iof_auxiliary.c iof_tipsy.c iof_gadget.c iof_art.c iof_array.c	
 VERSION = 1.9
 
-CC	= gcc
+CC		= gcc
 CFLAGS	= -O3 -mcmodel=medium -Wall -pedantic
 LIBS	=
 

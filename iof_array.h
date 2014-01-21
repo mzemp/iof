@@ -17,23 +17,23 @@
 */
 
 typedef struct array_header {
-    
-    int N[4];
-    } ARRAY_HEADER;
+	
+	int N[4];
+	} ARRAY_HEADER;
 
 typedef struct array_particle {
-    
-    int *ia;
-    float *fa;
-    double *da;
-    } ARRAY_PARTICLE;
+	
+	int *ia;
+	float *fa;
+	double *da;
+	} ARRAY_PARTICLE;
 
 /*
 ** Functions
 */
 
 void allocate_array_particle(const ARRAY_HEADER *, ARRAY_PARTICLE *);
-    
+	
 void read_array_xdr_header(XDR *, ARRAY_HEADER *);
 void read_array_xdr_particle(XDR *, const ARRAY_HEADER *, ARRAY_PARTICLE *);
 

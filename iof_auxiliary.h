@@ -15,62 +15,69 @@
 
 typedef struct physical_constants {
 
-    double GNewton;
-    double GNewton_Cosmology;
-    double k_Boltzmann;
-    double m_Proton;
-    double m_Neutron;
-    double m_Electron;
-    double Mo;
-    double Lo;
-    double rho_crit;
-    double rho_crit_Cosmology;
-    } PHYSICAL_CONSTANTS;
+	double c_light;
+	double au;
+	double yr;
+	double G_Newton;
+	double k_Boltzmann;
+	double uamu;
+	double m_proton;
+	double m_neutron;
+	double m_electron;
+	double eV;
+	double mu_sun;
+	double Mo;
+	double Lo;
+	double pc;
+	double G_Newton_cosmology;
+	double rho_crit;
+	double rho_crit_cosmology;
+	} PHYSICAL_CONSTANTS;
 
 typedef struct conversion_factors {
 
-    double km_per_s_2_kpc_per_Gyr;
-    double kpc_per_Gyr_2_km_per_s;
-    } CONVERSION_FACTORS;
+	double km_per_s_2_kpc_per_Gyr;
+	double kpc_per_Gyr_2_km_per_s;
+	} CONVERSION_FACTORS;
 
 typedef struct cosmological_parameters {
 
-    double OmegaM0;
-    double OmegaDM0; 
-    double OmegaB0;
-    double OmegaL0;
-    double OmegaK0;
-    double OmegaR0;
-    double h0_100;
-    } COSMOLOGICAL_PARAMETERS;
+	double OmegaM0;
+	double OmegaD0; 
+	double OmegaB0;
+	double OmegaL0;
+	double OmegaK0;
+	double OmegaR0;
+	double h0_100;
+	} COSMOLOGICAL_PARAMETERS;
 
 typedef struct unit_system {
 
-    double LBox;
-    double Hubble0;
-    double rhocrit0;
-    } UNIT_SYSTEM;
+	double LBox;
+	double Hubble0;
+	double rhocrit0;
+	} UNIT_SYSTEM;
 
 typedef struct coordinate_transformation {
 
-    /*
-    ** Unit scale factors
-    */
-    double L_usf;
-    double T_usf;
-    double V_usf;
-    double M_usf;
-    /*
-    ** Coordinate system scale factors
-    */
-    double L_cssf;
-    double V_cssf;
-    /*
-    ** Coordinate system shifts
-    */
-    double L_css[3];
-    double V_css[3];
-    } COORDINATE_TRANSFORMATION;
+	/*
+	** Unit scale factors
+	*/
+	double L_usf;
+	double T_usf;
+	double V_usf;
+	double M_usf;
+	/*
+	** Coordinate system scale factors
+	*/
+	double L_cssf;
+	double V_cssf;
+	/*
+	** Coordinate system shifts
+	*/
+	double L_css[3];
+	double V_css[3];
+	} COORDINATE_TRANSFORMATION;
 
 /*
 ** Constant structures
