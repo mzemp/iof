@@ -1,20 +1,23 @@
 # Makefile for iof library
 
 NAME	= iof
-SOURCES	= iof_auxiliary.c iof_tipsy.c iof_gadget.c iof_art.c iof_array.c
 VERSION	= $(shell git describe --tags --long)
 
 CC		= gcc
 CFLAGS	= -O3 -mcmodel=medium -Wall -pedantic
 LIBS	=
 
+SRCS	= $(wildcard *.c)
+INCS	= $(wildcard *.h)
+OBJS	= $(SRCS:.c=.o)
+
 # Rules
 
-iof: $(SOURCES:.c=.o) $(SOURCES:.c=.h) Makefile
-	ar rcs lib$(NAME).a $(SOURCES:.c=.o) $(LIBS)
+$(NAME): $(OBJS) $(INCS) Makefile
+	ar rcs lib$(NAME).a $(OBJS) $(LIBS)
 
 clean:
-	rm -f *.o *.a *~
+	rm -f *~ *.o *.a
 
 install:
 	cd ../include; ln -sf ../$(NAME)/$(NAME).h .
