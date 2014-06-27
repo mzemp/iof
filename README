@@ -1,0 +1,37 @@
+DESCRIPTION
+
+This is a library of some basic input/output functions for several commonly used data formats in computational astrophysics like Tipsy, Gadget, and ART.
+
+
+AUTHOR
+
+Marcel Zemp <marcelzemp@gmail.com>
+
+
+OFFICIAL SOURCE
+
+GitHub: https://github.com/mzemp/iof
+
+
+DEPENDENCIES
+
+None.
+
+
+COMPILATION & INSTALLATION
+
+First, clone or download the code from GitHub. In oder to compile the code, just type make in the iof code directory:
+
+$> make
+
+This will generate a static library file called libiof.a. Other code can then be linked against this library.
+
+In order to clean up the code, type:
+
+$> make clean
+
+Assuming that the iof code directory is located within a local library directory (e.g. ~/libraries/ under your home directory) you can type:
+
+$> make install
+
+in the code directory. This will then generate symbolic links to the iof.h and libiof.a in the parallel directories ~/libraries/include/ and ~/libraries/lib/, respectively.
