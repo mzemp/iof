@@ -20,7 +20,7 @@ None.
 
 COMPILATION & INSTALLATION
 
-First, clone or download the code from GitHub. In oder to compile the code, just type make in the iof code directory:
+First, clone or download the code from GitHub. In order to compile the code, just type make in the iof code directory:
 
 $> make
 
