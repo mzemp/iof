@@ -1,5 +1,5 @@
 /*
-** tipsy.h
+** iof_tipsy.h
 **
 ** Various handling functions for tipsy format
 **

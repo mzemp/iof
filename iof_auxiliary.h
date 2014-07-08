@@ -1,5 +1,5 @@
 /*
-** auxiliary.h
+** iof_auxiliary.h
 **
 ** Various auxiliary functions and definitions
 **

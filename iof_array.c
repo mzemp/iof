@@ -1,5 +1,5 @@
 /*
-** array.c
+** iof_array.c
 **
 ** Various handling functions for arrays
 **
@@ -70,7 +70,7 @@ void read_array_xdr_particle(XDR *xdrs, const ARRAY_HEADER *ah, ARRAY_PARTICLE *
 void write_array_xdr_header(XDR *xdrs, ARRAY_HEADER *ah) {
 
 	int i;
-	
+
 	for (i = 0; i < 4; i++) {
 		assert(xdr_int(xdrs,&ah->N[i]) == 1);
 		}

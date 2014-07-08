@@ -39,10 +39,10 @@ typedef struct art_header {
 	float ekin2;
 	float au0;
 	float aeu0;
-	int	  Nrow;
-	int	  Ngrid;
-	int	  Nspecies;
-	int	  Nseed;
+	int   Nrow;
+	int   Ngrid;
+	int   Nspecies;
+	int   Nseed;
 	float OmM0;
 	float OmL0;
 	float h100;

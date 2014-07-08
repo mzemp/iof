@@ -1,5 +1,5 @@
 /*
-** tipsy.c
+** iof_tipsy.c
 **
 ** Various handling functions for tipsy format
 **
@@ -809,7 +809,7 @@ void read_tipsy_ascii(FILE *fp, TIPSY_STRUCTURE *ts) {
 	TIPSY_GAS_PARTICLE *tgp;
 	TIPSY_DARK_PARTICLE *tdp;
 	TIPSY_STAR_PARTICLE *tsp;
-	
+
 	th = ts->th;
 	tgp = ts->tgp;
 	tdp = ts->tdp;
@@ -948,7 +948,7 @@ void read_tipsy_ascii_dpp(FILE *fp, TIPSY_STRUCTURE_DPP *tsdpp) {
 	TIPSY_GAS_PARTICLE_DPP *tgpdpp;
 	TIPSY_DARK_PARTICLE_DPP *tdpdpp;
 	TIPSY_STAR_PARTICLE_DPP *tspdpp;
-	
+
 	th = tsdpp->th;
 	tgpdpp = tsdpp->tgpdpp;
 	tdpdpp = tsdpp->tdpdpp;
@@ -1087,7 +1087,7 @@ void write_tipsy_ascii(FILE *fp, const TIPSY_STRUCTURE *ts) {
 	TIPSY_GAS_PARTICLE *tgp;
 	TIPSY_DARK_PARTICLE *tdp;
 	TIPSY_STAR_PARTICLE *tsp;
-	
+
 	th = ts->th;
 	tgp = ts->tgp;
 	tdp = ts->tdp;
@@ -1192,7 +1192,7 @@ void write_tipsy_ascii_dpp(FILE *fp, const TIPSY_STRUCTURE_DPP *tsdpp) {
 	TIPSY_GAS_PARTICLE_DPP *tgpdpp;
 	TIPSY_DARK_PARTICLE_DPP *tdpdpp;
 	TIPSY_STAR_PARTICLE_DPP *tspdpp;
-	
+
 	th = tsdpp->th;
 	tgpdpp = tsdpp->tgpdpp;
 	tdpdpp = tsdpp->tdpdpp;

@@ -1,5 +1,5 @@
 /*
-** auxiliary.c
+** iof_auxiliary.c
 **
 ** Various auxiliary functions and definitons
 **
@@ -50,12 +50,12 @@ const CONVERSION_FACTORS ConversionFactors = {
 */
 
 void reorder(void *pointer, size_t size, size_t n){
-	
+
 	unsigned char *buffer, tmp;
 	int i, j;
-	
+
 	buffer = pointer;
-	
+
 	for(i = 0; i < n; i++){
 		for (j = 0; j < (size/2); j++) {
 			tmp = buffer[i*size+j];
@@ -118,7 +118,7 @@ void set_default_values_coordinate_transformation(COORDINATE_TRANSFORMATION *ct)
 */
 
 void calculate_units_transformation(UNIT_SYSTEM fromus, UNIT_SYSTEM tous, COORDINATE_TRANSFORMATION *ct) {
-	
+
 	ct->L_usf = tous.LBox/fromus.LBox;
 	ct->T_usf = fromus.Hubble0/tous.Hubble0;
 	ct->V_usf = ct->L_usf/ct->T_usf;

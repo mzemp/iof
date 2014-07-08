@@ -696,7 +696,7 @@ void read_art_nb_star_properties(ART_DATA ad, ART_STAR_PROPERTIES *asp) {
 void move_art_nb_gas_filepositions_level_begin(ART_DATA ad, int level) {
 
 	int header, trailer;
-		
+
 	fread(&header,sizeof(int),1,ad.GasFile[0]);
 	if (ad.doswap) reorder(&header,sizeof(int),1);
 	
@@ -714,7 +714,7 @@ void move_art_nb_gas_filepositions_level_begin(ART_DATA ad, int level) {
 void move_art_nb_gas_filepositions_level_end(ART_DATA ad, int level) {
 
 	int header, trailer;
-	
+
 	assert(fread(&trailer,sizeof(int),1,ad.GasFile[0]) == 1);
 	if (ad.doswap) reorder(&trailer,sizeof(int),1);
 	

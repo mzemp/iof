@@ -1,5 +1,5 @@
 /*
-** gadget.h
+** iof_gadget.h
 **
 ** Various handling functions for gadget format
 **
@@ -14,7 +14,7 @@
 */
 
 typedef struct io_header {
-	
+
 	int npart[6];						 /*!< number of particles of each type in this file */
 	double mass[6];						 /*!< mass of particles of each type. If 0, then the masses are explicitly
 										   stored in the mass-block of the snapshot file, otherwise they are omitted */
